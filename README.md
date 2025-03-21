@@ -20,11 +20,16 @@ Ce rapport documente les différents tests réalisés sur l'application afin de 
 
 ## 2. Résultats des Tests
 
-### 🧪 2.1. Préparation et Nettoyage des Tests
+### 2.1. Tests Fonctionnels (PHPUnit)
+<p align="center">
+  <img src="https://phpunit.de/img/phpunit.svg" alt="PHPUnit" height="40"/>
+</p>
+
+#### 🧪 2.1.1. Préparation et Nettoyage des Tests
 
 Les tests PHPUnit utilisent deux méthodes essentielles :  
 
-#### 🔹 `setUp()`
+##### 🔹 `setUp()`
 Cette méthode est exécutée **avant chaque test** pour initialiser l’environnement de test.  
 Dans notre cas, elle :  
 1. **Crée une base SQLite en mémoire** (elle est vide à chaque test).  
@@ -48,15 +53,12 @@ Elle permet notamment de :
 
 ---
 
-### 🧪 2.2. Tests Fonctionnels (PHPUnit)
-<p align="center">
-  <img src="https://phpunit.de/img/phpunit.svg" alt="PHPUnit" height="40"/>
-</p>
+#### 🧪 2.1.2. Résultats tests Fonctionnels (PHPUnit)
 
-#### 📋 Méthodologie
+##### 📋 Méthodologie
 Les tests unitaires et fonctionnels ont été réalisés avec **PHPUnit**. Chaque test vérifie une action spécifique de l'application, notamment l'ajout, la modification et la suppression d'un utilisateur.
 
-#### 🔍 Liste des tests effectués et résultats
+##### 🔍 Liste des tests effectués et résultats
 
 | Test | Description | Code | Résultat |
 |---|----------|-------|---------|
@@ -74,22 +76,22 @@ Les tests unitaires et fonctionnels ont été réalisés avec **PHPUnit**. Chaqu
 
 ---
 
-### 📸 Captures d'écran des résultats des tests
+##### 📸 Captures d'écran des résultats des tests
 <!-- Ajoute ici des captures d’écran des résultats PHPUnit -->
 ![resultat tests TestUserManager php](https://github.com/user-attachments/assets/7a16a0a3-3b05-48a7-87e3-20bd804962e9)
 
 ---
 
-### 2.3. Explication des Tests et Résultats
+#### 2.1.3. Explication des Tests et Résultats
 
-#### ✅ **Tests réussis**
+##### ✅ **Tests réussis**
 Les tests validés prouvent que les fonctionnalités suivantes sont bien implémentées :
 - **Ajout d’un utilisateur** en base de données ✅
 - **Modification des informations** d’un utilisateur ✅
 - **Suppression d’un utilisateur** ✅
 - **Récupération des utilisateurs enregistrés** ✅
 
-#### ❌ **Tests échoués**
+##### ❌ **Tests échoués**
 Les deux tests en échec sont liés à la **gestion des erreurs** :
 1. **testInvalidUpdateThrowsException**  
    - **Problème** : Le test attend une **InvalidArgumentException** pour une mise à jour invalide, mais elle n’est pas levée.  
@@ -101,13 +103,75 @@ Les deux tests en échec sont liés à la **gestion des erreurs** :
 
 ---
 
-### 2.4. 📌 Conclusion Tests Fonctionnels
+#### 2.1.4. 📌 Conclusion Tests Fonctionnels
 
 Les tests démontrent que l’application fonctionne correctement pour **les cas standards**, mais nécessitent des ajustements pour la gestion des erreurs.  
 👉 **Prochaine étape** : Corriger les exceptions manquantes pour garantir une validation robuste.
 
 ---
 
+### 🧪 2.2. Tests End-to-End (E2E) (Selenium)
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Selenium_Logo.png" alt="Selenium" height="40"/>
+</p>
+
+#### 🎯 2.2.1 Objectif des tests E2E
+Les tests End-to-End (E2E) permettent de vérifier le bon fonctionnement global de l’application en simulant un parcours utilisateur réel. L’objectif principal est d’automatiser et de valider les interactions clés avec l’interface utilisateur.  
+
+Dans ce projet, j'ai utilisé **Selenium** pour tester les fonctionnalités essentielles du module de gestion des utilisateurs :  
+✅ Ajout d’un nouvel utilisateur  
+✅ Vérification de son affichage dans la liste  
+✅ Modification de ses informations  
+✅ Suppression de l’utilisateur et vérification de sa disparition  
+
+---
+
+#### ⚙️ 2.2.2 Déroulement du test automatisé
+
+Le test se déroule en **quatre étapes successives**, qui valident chacune une fonctionnalité de l’application.  
+
+1️⃣ **Ajout d’un utilisateur**  
+- L’utilisateur saisit un **nom** et un **email** dans le formulaire.  
+- Il clique sur le bouton **"Ajouter"**.  
+- L’application affiche l’utilisateur dans la liste des utilisateurs.  
+- Vérification que l’utilisateur est bien ajouté en vérifiant les élèments affichées.  
+
+2️⃣ **Modification des informations de l’utilisateur**  
+- L’utilisateur clique sur le bouton **✏️ Modifier** à côté de son nom.  
+- Il modifie les informations (**nom** et **email**).  
+- Il valide la modification en cliquant sur le bouton d’enregistrement.  
+- Vérification que les nouvelles informations sont bien mises à jour dans la liste.  
+
+3️⃣ **Vérification des informations mises à jour**  
+- Récupération du texte affiché après modification.  
+- Comparaison avec les informations initiales pour s’assurer qu’il y a bien eu un changement.  
+
+4️⃣ **Suppression de l’utilisateur**  
+- L’utilisateur clique sur le bouton **❌ Supprimer** à côté de son nom.  
+- Vérification que l’utilisateur a bien disparu de la liste et que la suppression a été effectuée correctement.  
+
+---
+
+##### 📸 Captures d'écran des résultats des tests
+| Capture 1 | Capture 2 |
+|-----------|-----------|
+| ![resultat tests E2E UserManager Selenium-1](https://github.com/user-attachments/assets/e1db91bf-6fa3-4fe3-afd0-d7939098808d) | ![resultat tests E2E UserManager Selenium-2](https://github.com/user-attachments/assets/01a8ba78-ecab-47a5-a64d-24946b8c7f67) |
+
+---
+
+#### 2.2.3 Résultats obtenus
+
+✅ **Succès des tests** : Tous les scénarios se sont déroulés comme prévu.  
+
+📌 **Détails des résultats** :  
+- **L’ajout de l’utilisateur** met bien à jour l’interface et les informations sont bien enregistrées.  
+- **La modification des informations** est bien prise en compte, et la liste des utilisateurs affiche les nouvelles valeurs.  
+- **La suppression** fonctionne correctement : l’utilisateur disparaît bien de la liste après confirmation.  
+- **Aucun bug détecté** lors des tests.  
+
+En conclusion, les tests valident le bon fonctionnement du module de gestion des utilisateurs dans un parcours utilisateur classique. 🚀  
+
+---
 
 
 
