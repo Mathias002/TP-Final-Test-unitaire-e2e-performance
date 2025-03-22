@@ -173,7 +173,155 @@ En conclusion, les tests valident le bon fonctionnement du module de gestion des
 
 ---
 
+Bien sûr ! Voici la version finale bien structurée et segmentée en trois tableaux pour chaque action des tests **Cypress**.  
 
+---
+
+## 🧪 2.3 Tests End-to-End (E2E) avec Cypress  
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/cypress-io/cypress/develop/assets/cypress-logo-dark.png" alt="Cypress" height="40"/>
+</p>
+
+### ⚙️ 2.3.1 Tests avec Cypress  
+
+Dans cette section, je vais detailler les tests **E2E** réalisés avec **Cypress** pour valider les fonctionnalités principales de l’application :  
+
+- **Ajout d’un utilisateur** via l’interface utilisateur  
+- **Vérification de son affichage** dans la liste des utilisateurs  
+- **Modification des informations** de l’utilisateur  
+- **Vérification de la mise à jour** des informations 
+- **Suppression de l’utilisateur** et vérification de sa disparition  
+
+#### 🕹️ Installation et configuration de Cypress  
+
+Tout d'abord il est néccessaire d'installer **Cypress** avec la commande suivante :  
+
+```sh
+npm install cypress --save-dev
+```
+
+Puis, lancez Cypress avec :  
+
+```sh
+npx cypress open
+```
+
+#### 🔢 Scénario de test avec Cypress  
+
+Le test automatisé suit le scénario suivant :  
+
+1. **Accès à l'application**  
+2. **Ajout d'un utilisateur** en remplissant le formulaire  
+3. **Vérification de son affichage dans la liste**  
+4. **Modification des informations de l'utilisateur**  
+5. **Vérification de la mise à jour des informations**  
+6. **Suppression de l'utilisateur**  
+7. **Vérification de sa suppression de la liste**  
+
+---
+
+### 🖥️ 2.3.2 Code des tests Cypress  
+
+```javascript
+describe('E2E Tests - User Management', () => {
+  it('should add, update, and delete a user successfully', () => {
+    
+    // Accéder à l'application
+    cy.visit('http://localhost/Efrei/M1/Test%20unit/TP-Final-Test-unitaire-e2e-performance/gestion_produit/')
+
+    // Définition des informations du nouvel utilisateur
+    const newUserName = 'Asahi'
+    const newUserEmail = 'asahi.lala@gmail.com' 
+
+    // Ajouter un nouvel utilisateur
+    cy.get('#name').type(newUserName)
+    cy.get('#email').type(`${newUserEmail}{enter}`)
+
+    // Vérifier que l'utilisateur est bien ajouté à la liste
+    cy.get('#userList li')
+      .should('contain', newUserName)
+      .and('contain', newUserEmail)
+
+    // Cliquer sur le bouton de modification (premier bouton "✏️")
+    cy.get('#userList li button').first().click()
+
+    // Effacer les anciens inputs
+    cy.get('#name').clear()
+    cy.get('#email').clear()
+
+    // Définition des nouvelles informations de l'utilisateur
+    const updatedUserName = 'AsahiUpdated'
+    const updatedUserEmail = 'asahiUpdated.lala@gmail.com' 
+
+    // Modifier les informations et valider
+    cy.get('#name').type(updatedUserName)
+    cy.get('#email').type(`${updatedUserEmail}{enter}`)
+
+    // Vérifier que la mise à jour a bien été prise en compte
+    cy.get('#userList li')
+      .first()
+      .should('contain', updatedUserName)
+      .and('contain', updatedUserEmail)
+
+    // Cliquer sur le bouton de suppression (dernier bouton "❌")
+    cy.get('#userList li button').last().click()
+
+    // Vérifier que l'utilisateur a bien été supprimé
+    cy.get('#userList li').should('not.exist')
+  })
+})
+```
+
+---
+
+### 📊 2.3.3 Détails des tests Cypress  
+
+#### 📌 Ajout d'un utilisateur
+
+| **Étape**             | **Description** | **Capture d'écran** | **Statut** |
+|----------------------|----------------|---------------------|------------|
+| **Accès à l'application** | L'utilisateur accède à l'interface web de gestion. | ![UserManager test -Accès à l'application-](https://github.com/user-attachments/assets/9eb86727-c6dc-47db-9a2d-f8834556807d) | ✅ |
+| **Saisie des informations** | Remplissage du formulaire avec le nom et l’email puis soumission du formulaire | ![UserManager test -Saisie des informations-](https://github.com/user-attachments/assets/46d7fd12-de48-49eb-9c5b-f55b9731e16c) | ✅ |
+| **Validation de l’ajout** | On verifie si le nouvel utilisateur est présent dans la liste. | ![UserManager test -Verification de l'affichage-](https://github.com/user-attachments/assets/21f741c5-8191-40c0-81a7-92334d125185) | ✅ |
+
+---
+
+#### ✏️ Modification d'un utilisateur 
+
+| **Étape**             | **Description** | **Capture d'écran** | **Statut** |
+|----------------------|----------------|---------------------|------------|
+| **Sélection de l'utilisateur** | Clic sur le bouton de modification du premier utilisateur. | ![UserManager test -Sélection de l'utilisateur-](https://github.com/user-attachments/assets/6ca1766b-dcef-46e2-92e3-a8475e125331) | ✅ |
+| **Mise à jour des informations et soumission** | Effacement des champs, saisie des nouvelles données et soumission | ![UserManager test -Mise à jour des informations et validation-](https://github.com/user-attachments/assets/e772f04f-7e1e-4aa0-97a5-e9949b6cd9f5) | ✅ |
+| **Vérification des changements** | Vérification de la mise à jour des informations affichées. | ![UserManager test -Vérification des changements-](https://github.com/user-attachments/assets/ee22dc51-8594-4cce-b7c4-491bb2e400a2) | ✅ |
+
+---
+
+#### ❌ Suppression d'un utilisateur
+
+| **Étape**             | **Description** | **Capture d'écran** | **Statut** |
+|----------------------|----------------|---------------------|------------|
+| **Sélection de l'utilisateur** | Clic sur le bouton de suppression du dernier utilisateur. | ![UserManager test -Sélection de l'utilisateur à supprimer-](https://github.com/user-attachments/assets/58773796-2d81-42b9-b6ef-df7f00f511d8) | ✅ |
+| **Confirmation de la suppression** | L’utilisateur disparaît de la liste après suppression. | ![UserManager test -Confirmation de la suppression-](https://github.com/user-attachments/assets/a14a64cd-fe64-47a5-a3ff-9c6cf52163ae) | ✅ |
+
+---
+
+## 🏁 2.3.4 Résultats obtenus  
+
+✅ **Succès des tests** : Tous les scénarios se sont déroulés comme prévu.  
+
+![UserManager test Specs TEST BODY](https://github.com/user-attachments/assets/596f6461-4166-441f-907a-be6155e7cffd)
+
+
+📌 **Détails des résultats** :  
+- **L’ajout de l’utilisateur** met bien à jour l’interface et les informations sont bien enregistrées.  
+- **La modification des informations** est bien prise en compte, et la liste des utilisateurs affiche les nouvelles valeurs.  
+- **La suppression** fonctionne correctement : l’utilisateur disparaît bien de la liste après confirmation.  
+- **Aucun bug détecté** lors des tests.  
+
+En conclusion, les tests valident le bon fonctionnement du module de gestion des utilisateurs dans un parcours utilisateur classique. 🚀  
+
+---
 
 
 ## 📂 Ressources
