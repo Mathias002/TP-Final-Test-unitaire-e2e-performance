@@ -306,7 +306,7 @@ describe('E2E Tests - User Management', () => {
 
 ---
 
-## 🏁 2.3.4 Résultats obtenus  
+### 🏁 2.3.4 Résultats obtenus  
 
 ✅ **Succès des tests** : Tous les scénarios se sont déroulés comme prévu.  
 
@@ -323,6 +323,157 @@ En conclusion, les tests valident le bon fonctionnement du module de gestion des
 
 ---
 
+## 2.4. Tests de Performance (JMeter)
+<p align="center">
+  <img src="https://jmeter.apache.org/images/logo.svg" alt="JMeter" height="40"/>
+</p>
+
+### 🚀 2.4.1. Méthodologie de Test
+
+Les tests de performance ont été réalisés avec **Apache JMeter** en simulant **500 utilisateurs** ajoutant des comptes simultanément. L'objectif était d'évaluer la robustesse de l'application et d'identifier d'éventuels goulots d'étranglement.
+
+#### 🔹 Configuration du Test
+- **Nombre de threads (utilisateurs)** : 500
+- **Période de montée en charge** : 15 secondes
+- **Action simulée** : Ajout d'un nouvel utilisateur (méthode POST)
+- **URL ciblée** : `.../gestion_produit/src/php/api.php`
+- **Données envoyées** : `name=Test${__threadNum}&email=user${__threadNum}@test.com`
+
+| **Threads (Users)** | **HTTP Request** | **HTTP Header Manager** |
+|----------------|---------------------|--------------------|
+| ![Thread Group](https://github.com/user-attachments/assets/acd3bc39-9d21-4dd2-8382-6e45865b3f55) | ![HTTP Request](https://github.com/user-attachments/assets/a5462098-13ae-47c4-ac10-617fe12419f9) | ![HTTP Header Manager](https://github.com/user-attachments/assets/b58f90c9-b92a-4bf9-ba1c-f6db80f27943) |
+
+---
+
+### 🧪 2.4.2. Résultats des Tests de Performance
+
+#### 📊 Statistiques Générales
+
+| Métrique | Valeur |
+|---|---|
+| **Nombre d'échantillons** | 500 |
+| **Temps de réponse moyen** | 14 ms |
+| **Temps de réponse médian** | 14 ms |
+| **Temps de réponse au 90% centile** | 28 ms |
+| **Temps de réponse minimum** | 3 ms |
+| **Temps de réponse maximum** | 34 ms |
+| **Taux d'erreur** | 0% |
+| **Débit** | 33,4 requêtes/seconde |
+| **Ko reçus par seconde** | 8,80 |
+| **Ko envoyés par seconde** | 9,86 |
+
+#### 📷 Captures des listeners et des résultats
+
+**tableau de résultat**
+
+![View Results in Table](https://github.com/user-attachments/assets/1c454ff9-95e5-4cfd-97d6-84fc096585fd)
+
+---
+
+**rapport agrégé**
+
+![Aggregate Report](https://github.com/user-attachments/assets/f04f42f2-e61a-4ac8-89d6-047c0c725dcc)
+
+---
+
+**Arbre de résultat -1 (Résultat de l'échantillon)**
+
+![View Results Tree-1](https://github.com/user-attachments/assets/b8ab6ba1-99c6-47b1-8f61-74f565b22419)
+
+---
+
+**Arbre de résultat -2 (Requête)**
+
+![View Results Tree-2](https://github.com/user-attachments/assets/8d32a994-d881-4ba6-b98b-1f4c7c9c0b46)
+
+---
+
+**Interface utilisateur de l'application**
+
+![Front UI](https://github.com/user-attachments/assets/0cd72864-51fe-4229-80ff-57db44f336e0)
+
+---
+
+**Table users DB**
+
+![Back DB](https://github.com/user-attachments/assets/c153c2b0-7e1a-4650-b837-f4cabd6fba7d)
+
+---
+
+#### 📈 Distribution des Temps de Réponse
+
+L'analyse détaillée des temps de réponse montre une distribution assez homogène :
+- **La majorité des requêtes** sont traitées entre **4 et 21 ms**
+- **Les requêtes les plus lentes** (90ème centile) sont traitées en **28 ms**
+- **Aucune erreur** n'a été détectée, ce qui indique une bonne stabilité du système
+
+**Graphique de résultats**
+
+![Graph Results](https://github.com/user-attachments/assets/39c62932-1c70-4d15-99e1-68dd732ce85d)
+
+#### 🔍 Analyse des Échantillons Individuels
+
+L'examen des échantillons individuels révèle :
+- **Temps d'établissement de connexion** : constant à 1 ms ou moins
+- **Latence** : variant entre 4 et 32 ms, reflétant le temps de traitement réel
+- **Taille des réponses** : constante à environ 270 octets, indiquant une structure de réponse uniforme
+
+---
+
+### 2.4.3. Analyse des Performances
+
+#### ✅ **Points Forts**
+- **Excellente stabilité** : aucune erreur sur les 500 requêtes simultanées
+- **Temps de réponse rapide** : moyenne de 14 ms, bien en dessous des seuils critiques
+- **Débit élevé** : 33,4 requêtes par seconde, permettant de traiter une charge importante
+- **Écart-type faible** : faible variation entre le temps de réponse moyen et médian
+
+
+#### 🔍 **Potentiels Goulots d'Étranglement**
+À 500 utilisateurs simultanés, l'application ne présente pas de goulots d'étranglement évidents. Cependant, plusieurs points méritent attention :
+
+1. **Temps de réponse maximum** (34 ms)  
+   - Bien que restant très acceptable, certaines requêtes sont traitées en 2-3 fois plus de temps que la moyenne.
+   - Une analyse plus approfondie des requêtes les plus lentes pourrait révéler des opportunités d'optimisation.
+
+2. **Montée en charge**  
+   - Les tests ont été réalisés avec une rampe de 15 secondes, ce qui a pu atténuer l'impact sur le serveur.
+   - Des tests avec une montée en charge plus rapide pourraient révéler des comportements différents.
+
+3. **Monitoring des ressources serveur**  
+   - Les données de CPU, mémoire et E/S disque n'ont pas été capturées pendant les tests.
+   - Ces métriques pourraient révéler des contraintes non visibles dans les temps de réponse.
+
+---
+
+### 2.4.4. Suggestions d'Optimisation
+
+Bien que l'application montre d'excellentes performances, voici quelques recommandations pour renforcer sa robustesse :
+
+1. **Mise en cache**  
+   - Implémenter un système de cache pour les opérations de lecture fréquentes.
+
+2. **Optimisation de la base de données**  
+   - Ajouter des index sur les colonnes fréquemment recherchées.
+   - Optimiser les requêtes SQL pour réduire le temps de traitement.
+
+3. **Tests de charge plus intensifs**  
+   - Augmenter le nombre d'utilisateurs simultanés (1000+) pour identifier les limites du système.
+   - Tester des scénarios mixtes (lecture/écriture) pour simuler un usage réel.
+
+4. **Monitoring proactif**  
+   - Mettre en place des outils de surveillance pour détecter les variations de performance.
+   - Établir des seuils d'alerte pour une intervention rapide en cas de dégradation.
+
+---
+
+### 2.4.5. 📌 Conclusion Tests de Performance
+
+Les tests de performance démontrent que l'application est **robuste et performante**, capable de gérer sans difficulté **500 utilisateurs simultanés** avec des temps de réponse excellents (14 ms en moyenne).
+
+L'absence d'erreurs lors des tests suggère une **bonne gestion des requêtes concurrentes**.
+
+---
 
 ## 📂 Ressources
 - **Documentation PHPUnit** : [https://phpunit.de](https://phpunit.de)
