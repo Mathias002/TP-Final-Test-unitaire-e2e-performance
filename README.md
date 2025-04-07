@@ -38,7 +38,6 @@ Dans notre cas, elle :
 
 ![setUp](https://github.com/user-attachments/assets/cd98cc05-6bde-417c-bcfc-8cffab933fd5)
 
-
 💡 **Pourquoi ?** Cela garantit que chaque test commence dans un environnement propre, sans interférences avec les autres tests.
 
 #### 🔹 `tearDown()`
@@ -117,7 +116,6 @@ Les tests démontrent que l’application fonctionne correctement pour **les cas
 
 #### 🎯 2.2.1 Objectif des tests E2E
 Les tests End-to-End (E2E) permettent de vérifier le bon fonctionnement global de l’application en simulant un parcours utilisateur réel. L’objectif principal est d’automatiser et de valider les interactions clés avec l’interface utilisateur.  
-
 Dans ce projet, j'ai utilisé **Selenium** pour tester les fonctionnalités essentielles du module de gestion des utilisateurs :  
 ✅ Ajout d’un nouvel utilisateur  
 ✅ Vérification de son affichage dans la liste  
@@ -173,10 +171,6 @@ En conclusion, les tests valident le bon fonctionnement du module de gestion des
 
 ---
 
-Bien sûr ! Voici la version finale bien structurée et segmentée en trois tableaux pour chaque action des tests **Cypress**.  
-
----
-
 ## 🧪 2.3 Tests End-to-End (E2E) avec Cypress  
 
 <p align="center">
@@ -192,6 +186,8 @@ Dans cette section, je vais detailler les tests **E2E** réalisés avec **Cypres
 - **Modification des informations** de l’utilisateur  
 - **Vérification de la mise à jour** des informations 
 - **Suppression de l’utilisateur** et vérification de sa disparition  
+
+---
 
 #### 🕹️ Installation et configuration de Cypress  
 
@@ -272,7 +268,6 @@ describe('E2E Tests - User Management', () => {
   })
 })
 ```
-
 ---
 
 ### 📊 2.3.3 Détails des tests Cypress  
@@ -312,7 +307,6 @@ describe('E2E Tests - User Management', () => {
 
 ![UserManager test Specs TEST BODY](https://github.com/user-attachments/assets/596f6461-4166-441f-907a-be6155e7cffd)
 
-
 📌 **Détails des résultats** :  
 - **L’ajout de l’utilisateur** met bien à jour l’interface et les informations sont bien enregistrées.  
 - **La modification des informations** est bien prise en compte, et la liste des utilisateurs affiche les nouvelles valeurs.  
@@ -343,8 +337,6 @@ Les tests de performance ont été réalisés avec **Apache JMeter** en simulant
 |----------------|---------------------|--------------------|
 | ![Thread Group](https://github.com/user-attachments/assets/acd3bc39-9d21-4dd2-8382-6e45865b3f55) | ![HTTP Request](https://github.com/user-attachments/assets/a5462098-13ae-47c4-ac10-617fe12419f9) | ![HTTP Header Manager](https://github.com/user-attachments/assets/b58f90c9-b92a-4bf9-ba1c-f6db80f27943) |
 
----
-
 ### 🧪 2.4.2. Résultats des Tests de Performance
 
 #### 📊 Statistiques Générales
@@ -362,15 +354,17 @@ Les tests de performance ont été réalisés avec **Apache JMeter** en simulant
 | **Ko reçus par seconde** | 8,80 |
 | **Ko envoyés par seconde** | 9,86 |
 
+---
+
 #### 📷 Captures des listeners et des résultats
 
-**tableau de résultat**
+**Tableau de résultat**
 
 ![View Results in Table](https://github.com/user-attachments/assets/1c454ff9-95e5-4cfd-97d6-84fc096585fd)
 
 ---
 
-**rapport agrégé**
+**Rapport agrégé**
 
 ![Aggregate Report](https://github.com/user-attachments/assets/f04f42f2-e61a-4ac8-89d6-047c0c725dcc)
 
@@ -411,6 +405,8 @@ L'analyse détaillée des temps de réponse montre une distribution assez homog�
 
 ![Graph Results](https://github.com/user-attachments/assets/39c62932-1c70-4d15-99e1-68dd732ce85d)
 
+---
+
 #### 🔍 Analyse des Échantillons Individuels
 
 L'examen des échantillons individuels révèle :
@@ -427,7 +423,6 @@ L'examen des échantillons individuels révèle :
 - **Temps de réponse rapide** : moyenne de 14 ms, bien en dessous des seuils critiques
 - **Débit élevé** : 33,4 requêtes par seconde, permettant de traiter une charge importante
 - **Écart-type faible** : faible variation entre le temps de réponse moyen et médian
-
 
 #### 🔍 **Potentiels Goulots d'Étranglement**
 À 500 utilisateurs simultanés, l'application ne présente pas de goulots d'étranglement évidents. Cependant, plusieurs points méritent attention :
@@ -535,16 +530,52 @@ Des tests E2E ont été effectués pour vérifier que l'ajout de la fonctionnali
 
 #### ✅ **Résultats des tests**
 
+**Selenium**
+
 | Fonctionnalité | État avant | État après | Impact |
 |---|---|---|---|
 | **Ajout d'utilisateur** | Fonctionnel | Fonctionnel | Aucun impact |
-| **Modification d'utilisateur** | Fonctionnel | Fonctionnel | Aucun impact |
-| **Suppression d'utilisateur** | Fonctionnel | Fonctionnel | Aucun impact |
+| **Modification d'utilisateur** | Fonctionnel | Fonctionnel | La modification ne s'applique pas à l'utilisateur qui vient d'être ajouté. |
+| **Suppression d'utilisateur** | Fonctionnel | Fonctionnel | La suppression ne s'applique pas à l'utilisateur qui vient d'être ajouté. |
 | **Affichage des utilisateurs** | Fonctionnel | Fonctionnel | Amélioré avec la recherche |
 
-**Capture des tests E2E**
+### ⚠️ Limite détectée dans les tests automatisés
 
-![Tests E2E](url_de_votre_capture_tests)
+Même si les **fonctionnalités** de l'application ne sont pas impactées dans leur fonctionnement, un souci est apparu côté **tests E2E**.  
+
+Lors de l’exécution, le test échoue à l’étape de **vérification de la suppression d’un utilisateur**. Pourtant, côté interface, tout se passe bien : l’utilisateur est correctement supprimé. 👀  
+
+🔍 **Explication du souci :**  
+Le test actuel se base sur la structure du **DOM**, et plus précisément sur le fait que la balise `ul#userList` ne contienne plus de `li` après suppression.  
+Or, depuis l’introduction de la **fonctionnalité de recherche**, un `li` est toujours présent dans la liste même quand aucun utilisateur n’est affiché (ex : message du style "Aucun utilisateur trouvé").  
+
+Ce comportement perturbe le test, qui croit à tort que la suppression a échoué.
+
+💡 **Piste d’amélioration :**  
+Il serait pertinent de rendre les assertions plus **précises** et **robustes**, en ciblant uniquement les `li` représentant des utilisateurs réels (par exemple via une classe ou un attribut spécifique), ou en excluant les éléments décoratifs/informatifs.  
+
+Cela permettrait :  
+- d’éviter les faux négatifs  
+- de renforcer la fiabilité des tests  
+- de prévenir les régressions futures  
+
+**Capture des tests E2E de non-regression Selenium**
+
+![UI - error test non regression - verif suppr user](https://github.com/user-attachments/assets/db9f3314-6026-44e8-9d07-92462231729f)
+
+---
+
+**Cypress**
+
+🔁 **Même constat côté Cypress**  
+
+Le même comportement a été observé lors des tests end-to-end réalisés avec **Cypress**. Bien que l'utilisateur soit correctement supprimé dans l'interface, le test échoue lors de la vérification finale. En cause : la logique de test repose également sur la structure du DOM, et considère qu’un `li` encore présent dans `#userList` signifie qu’un utilisateur est encore affiché. Or, comme pour les tests manuels ou avec JMeter, la **nouvelle logique de recherche** ajoute un `li` par défaut (par exemple, un message "Aucun utilisateur trouvé"), ce qui fausse le résultat.  
+
+🛠️ Pour corriger cela, il faudra affiner les sélecteurs dans les assertions Cypress, ou filtrer les éléments affichés pour ne cibler que les vrais utilisateurs. Cela garantirait des résultats plus fiables et éviterait les échecs de test non justifiés.
+
+**Capture des tests E2E de non-regression Cypress**
+
+![UI - error test non regression - verif suppr user cypress](https://github.com/user-attachments/assets/d6386395-a8ec-4a9f-8316-575276659f21)
 
 ---
 
@@ -556,9 +587,9 @@ Des tests comparatifs ont été réalisés pour évaluer l'impact de la fonction
 
 | Métrique | Avant | Après | Différence |
 |---|---|---|---|
-| **Temps de chargement initial** | X ms | Y ms | Z% |
-| **Utilisation mémoire (browser)** | X MB | Y MB | Z% |
-| **Temps de réponse moyen** | X ms | Y ms | Z% |
+| **Taux d'erreur** | 0% | 0% | Inexistante |
+| **Débit** | 33,4 requêtes/seconde | 33,6 requêtes/seconde | Insignifiante |
+| **Temps de réponse moyen** | 14 ms | 11 ms | Insignifiante |
 
 La nouvelle fonctionnalité de recherche utilise une approche de filtrage côté client qui :
 - Ne génère pas de requêtes supplémentaires vers le serveur
@@ -567,9 +598,9 @@ La nouvelle fonctionnalité de recherche utilise une approche de filtrage côté
 
 ---
 
-### 🌟 2.5.5. Conclusion
+### 🌟 2.5.5. Compte rendu de l'implémentation d'une nouvelle fonctionalité
 
-L'ajout de la fonctionnalité de recherche représente une amélioration significative de l'expérience utilisateur sans compromettre les performances ou la stabilité de l'application. Cette implémentation démontre comment des améliorations peuvent être intégrées de manière efficace dans une application existante.
+L'ajout de la fonctionnalité de recherche représente une amélioration de l'expérience utilisateur sans compromettre les performances ou la stabilité de l'application. Cette implémentation démontre comment des améliorations peuvent être intégrées de manière efficace dans une application.
 
 **Points forts de cette implémentation :**
 - Amélioration de l'utilisabilité pour les listes d'utilisateurs volumineuses
@@ -577,14 +608,79 @@ L'ajout de la fonctionnalité de recherche représente une amélioration signifi
 - Aucun impact sur les fonctionnalités CRUD existantes
 - Impact négligeable sur les performances générales de l'application
 
-**Perspectives d'amélioration future :**
-- Ajout d'options de filtrage avancées (par date, statut, etc.)
-- Implémentation d'une recherche côté serveur pour les grandes bases de données
-- Persistance des filtres de recherche lors des sessions utilisateur
+⚠️ **Des tests à renforcer**  
 
-## 📂 Ressources
-- **Documentation PHPUnit** : [https://phpunit.de](https://phpunit.de)
-- **PHP 8.3 Documentation** : [https://www.php.net/releases/8.3/en.php](https://www.php.net/releases/8.3/en.php)
+Le vrai point faible se situe dans la manière dont les tests E2E ont été conçus à l’origine. Peu robustes, ils se sont révélés sensibles à la moindre évolution côté front. La fonctionnalité en elle-même fonctionne parfaitement, mais ce sont les **assertions trop génériques** qui posent problème. Pour garantir la fiabilité des vérifications dans le temps, les tests doivent être **plus précis et ciblés**, afin de ne pas échouer à cause de simples ajustements visuels ou structurels de l’interface.
+
+---
+
+## 3. Conclusion du projet
+
+Ce projet avait pour objectif de mettre en place des series de test sur une application de gestion des utilisateurs tout en appliquant une démarche de **qualité logicielle complète** : tests unitaires, tests end-to-end, tests de performance, et tests de non-regression.  
+
+### 🧱 Ce qui a été mis en place :  
+- Une interface simple de **gestion des utilisateurs** (ajout, modification, suppression) en **JavaScript** côté client, avec une **API PHP** côté serveur.  
+- Des **tests unitaires** avec **PHPUnit**, assurant le bon fonctionnement de la logique métier côté serveur.  
+- Des **tests End-to-End (E2E)** réalisés avec **Cypress** et **Selenium**, pour simuler un vrai parcours utilisateur et valider les interactions avec l’interface.  
+- Des **tests de performance** avec **JMeter**, afin d’évaluer la stabilité et le comportement de l’application sous une charge importante (jusqu’à 500 utilisateurs simultanés).  
+- Des **tests de non-régression** afin de vérifier le bon fonctionnement de l'application suite à l'ajout d'une nouvelle fonctionnalité.  
+
+### 🔍 Ce que les tests ont révélé :  
+- Les **tests unitaires** sont passés avec succès et ont confirmé la fiabilité de l’application, cependant certaines exceptions concernant notamment la modification et la suppression sont absentes, il serait intéressant de les inclure afin de rendre l'application plus fiable et plus robuste.
+- Les **tests E2E** ont démontré le bon fonctionnement des fonctionnalités de base de l'application (ajout / modification / suppression) du côté de l'interface utilisateur.
+- Les **tests de non-regression** ont détecté une fragilité liée à la conception initiale : certains scénarios échouaient suite à de légers changements dans l’interface (ex. : ajout d’un message dans la liste des utilisateurs). Cela a mis en évidence la nécessité de **tests plus robustes et précis**.  
+- Les **tests de performance** ont montré une **bonne tenue du serveur** même sous forte charge, avec des temps de réponse raisonnables et sans surcharge critique.  
+
+### 📚 Ce que ce projet a permis d’apprendre :  
+- L’importance de **concevoir les tests dès le début** avec une certaine tolérance aux évolutions du front.  
+- Comment structurer une suite de tests cohérente et complémentaire (unitaires + E2E + perf + non-regression).  
+- L’usage d’outils comme **PHPUnit**, **Cypress**, **Selenium**, et **JMeter** dans un projet concret.  
+- L’impact des choix techniques (structure HTML, appels AJAX, gestion du DOM) sur la fiabilité des tests automatisés.  
+
+En résumé, ce projet a permis de **consolider des compétences full-stack** et de **découvrir les bases des tests automatisés** tout en adoptant une démarche qualité. Il met aussi en avant des **axes d'amélioration** pour garantir la maintenabilité et la stabilité d'une application dans le temps.  
+
+---
+
+## 🌍 Ressources
+
+### ✅ Tests Unitaires  
+- **Documentation PHPUnit** : [https://phpunit.de](https://phpunit.de)  
+- **Documentation PHP 8.3** : [https://www.php.net/releases/8.3/en.php](https://www.php.net/releases/8.3/en.php)
+
+### 🔁 Tests End-to-End (E2E)  
+- **Documentation Cypress** : [https://docs.cypress.io/app/get-started/why-cypress](https://docs.cypress.io/app/get-started/why-cypress)  
+- **Documentation Selenium IDE** : [https://www.selenium.dev/selenium-ide/docs/en/introduction/getting-started](https://www.selenium.dev/selenium-ide/docs/en/introduction/getting-started)
+
+### 🚀 Tests de Performance  
+- **Tutoriel JMeter (YouTube)** : [Tests de performance avec JMeter – Informatique Sans Complexe](https://www.youtube.com/watch?v=0wy7503Bhfc&t=2s&ab_channel=InformatiqueSansComplexe%21)
+
+### 📁 Anexe 
+Vous aurez également à disposition :
+- Le code source de l'application dans **gestion_produit**
+- Toutes les captures des différents tests présents dans ce rapport sont dans le dossier **Doc img** 
+- Le fichier de test de Selenim dans **E2E tests/Selenium**
+- Le code source de test Cypress dans **gestion_produit/cypress/e2e/UserManager**
+- Le fichier de test de JMeter dans **JMeter test performance**
+
+---
+
+## 🤖 Mention sur l'utilisation de l'Intelligence Artificielle
+
+Dans le cadre de ce projet, l’intelligence artificielle, notamment [**ChatGPT**](https://chat.openai.com) et [**Claude**](https://claude.ai/new), ont été utilisée comme **outil d’assistance au développement et à la rédaction**. Elle est intervenue à différents niveaux pour faciliter et accélérer le travail, tout en conservant une démarche de compréhension et de contrôle.
+
+Plus précisément, l’IA a été mobilisée pour :
+
+- **La mise en forme du rapport**, afin d’assurer une structure claire, fluide et cohérente tout au long du document.
+- **Le développement de la nouvelle fonctionnalité de recherche côté client**, Le dévelopement n’étant pas l’objectif central du projet, j'ai favorisé l'IA concernant cette tâche. L’IA à ce stade a permis **de gagner du temps sur l’implémentation** pour mieux se concentrer sur l’intégration des tests et l’analyse des performances.
+- **La configuration des tests de performance dans JMeter**, en particulier pour simuler des requêtes AJAX POST correctement, et interpréter les résultats.
+
+L’IA a donc été utilisée comme **levier d’efficacité** tout en servant un objectif d'accompagnement : comprendre, tester et optimiser une application web dans un contexte de qualité logicielle.
+
+---
+
+## 🙏 Remerciements
+
+Je vous remercie pour votre lecture et vous souhaite une bonne journée/soirée.
 
 ---
 
