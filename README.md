@@ -646,7 +646,7 @@ Vous aurez également à disposition :
 - Le code source de l'application dans **gestion_produit**
 - Toutes les captures des différents tests présents dans ce rapport sont dans le dossier **Doc img** 
 - Le fichier de test de Selenim dans **E2E tests/Selenium**
-- Le code source de test Cypress dans **gestion_produit/cypress/e2e/UserManager**
+- Le code source du test Cypress dans **gestion_produit/cypress/e2e/UserManager**
 - Le fichier de test de JMeter dans **JMeter test performance**
 
 ---
