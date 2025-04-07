@@ -1,0 +1,208 @@
+{
+  "id": "7449f6d2-79f8-4519-b096-5a5cc8252ebe",
+  "version": "2.0",
+  "name": "Final project UserManager",
+  "url": "http://localhost",
+  "tests": [{
+    "id": "3a8e77fc-7563-4d46-8cec-3e0a45b0c287",
+    "name": "E2E tests UserManager",
+    "commands": [{
+      "id": "670e6565-1ad5-4b7b-899e-012099f73807",
+      "comment": "",
+      "command": "open",
+      "target": "/Efrei/M1/Test%20unit/TP-Final-Test-unitaire-e2e-performance/gestion_produit/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bb1c4785-551a-4bd4-872e-a84e893d2cd6",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1761x998",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "dba5db8d-3c36-4d46-a8d2-1e44d9a9d085",
+      "comment": "On clique sur l'input d'ajout du nom d'un nouvel utilisateur",
+      "command": "click",
+      "target": "id=name",
+      "targets": [
+        ["id=name", "id"],
+        ["css=#name", "css:finder"],
+        ["xpath=//input[@id='name']", "xpath:attributes"],
+        ["xpath=//form[@id='userForm']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1bcadbe8-dad8-43b9-a134-668457972762",
+      "comment": "On renseigne le nom du nouvel utilisateur",
+      "command": "type",
+      "target": "id=name",
+      "targets": [
+        ["id=name", "id"],
+        ["css=#name", "css:finder"],
+        ["xpath=//input[@id='name']", "xpath:attributes"],
+        ["xpath=//form[@id='userForm']/input[2]", "xpath:idRelative"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "Asahi"
+    }, {
+      "id": "2383438b-6ff6-49f8-8a66-bc16138f7f4b",
+      "comment": "On clique sur l'input d'ajout de l'email d'un nouvel utilisateur",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='userForm']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "04fb7e44-464e-49c3-96bf-3529c3b01163",
+      "comment": "On renseigne l'email du nouvel utilisateur",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='userForm']/input[3]", "xpath:idRelative"],
+        ["xpath=//input[3]", "xpath:position"]
+      ],
+      "value": "asahi.lala@gmail.com"
+    }, {
+      "id": "e6539d5f-a779-45ff-8505-c432c5df705e",
+      "comment": "On clique sur le bouton \"Ajouter\"",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form[@id='userForm']/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Ajouter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3088670c-9ca1-4b4a-a1e3-3f1066f26bfc",
+      "comment": "On vérifie si l'utilisateur a été ajouté",
+      "command": "assertElementPresent",
+      "target": "xpath=//ul[@id='userList']/li",
+      "targets": [
+        ["css=li", "css:finder"],
+        ["xpath=//ul[@id='userList']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "14d54fe3-e66c-45b3-80b4-24540295dd43",
+      "comment": "On récupère le contenu de la balise html contenant les informations du nouvel utilisateur et on l'affecte à la variable Infos",
+      "command": "storeText",
+      "target": "xpath=//ul[@id='userList']/li",
+      "targets": [],
+      "value": "Infos"
+    }, {
+      "id": "dcddcc47-f57d-4602-bcfd-fc8c3b3a09de",
+      "comment": "On affiche le contenu de la variable Infos dans la console",
+      "command": "echo",
+      "target": "${Infos}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fb79f866-6fc3-49b2-97c4-08ac1b73a30f",
+      "comment": "On clique sur le bouton de modification",
+      "command": "click",
+      "target": "css=button:nth-child(1)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "dfce24e5-ae42-4a77-9549-2a4f829060d7",
+      "comment": "On clique sur l'input d'ajout du nom d'un nouvel utilisateur",
+      "command": "click",
+      "target": "id=name",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "da844b96-dbc7-4c58-9ab8-47281c9a59bb",
+      "comment": "On renseigne le nouveau nom de l'utilisateur",
+      "command": "type",
+      "target": "id=name",
+      "targets": [],
+      "value": "AsahiUpdated"
+    }, {
+      "id": "cee201a3-7e87-4d42-90e2-a498aa46c471",
+      "comment": "On clique sur l'input d'ajout de l'email d'un nouvel utilisateur",
+      "command": "click",
+      "target": "id=email",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4bf7bdf4-067d-486b-b133-4ff693fd416b",
+      "comment": "On renseigne le nouvel email de l'utilisateur",
+      "command": "type",
+      "target": "id=email",
+      "targets": [],
+      "value": "asahiUpdated.lala@gmail.com"
+    }, {
+      "id": "881d6df1-2893-45db-8d1e-a13f32c4cf56",
+      "comment": "On clique sur le bouton \"Ajouter\"",
+      "command": "click",
+      "target": "css=button:nth-child(4)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "402e8218-bbb5-4c12-9a0c-4cc3cf6b2cbd",
+      "comment": "On récupère le contenu de la balise html contenant les informations de l'utilisateur et on l'affecte à la variable UpdatedInfos",
+      "command": "storeText",
+      "target": "xpath=//ul[@id='userList']/li",
+      "targets": [],
+      "value": "UpdatedInfos"
+    }, {
+      "id": "1c75f83c-36d8-4a4f-8007-f0f823de943e",
+      "comment": "On affiche le contenu de la variable UpdatedInfos dans la console",
+      "command": "echo",
+      "target": "${UpdatedInfos}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4cd2d340-e17e-41e1-94d0-ca661975bfa9",
+      "comment": "On vérifie que le contenu de la balise html contenant les informations de l'utilisateur ne contient pas la même valeur que notre utilisateur du début",
+      "command": "assertNotText",
+      "target": "xpath=//ul[@id='userList']/li",
+      "targets": [],
+      "value": "${Infos}"
+    }, {
+      "id": "82c01363-5263-4da5-a32b-067e624914c3",
+      "comment": "On clique sur le bouton \"Supprimer\"",
+      "command": "click",
+      "target": "css=button:nth-child(2)",
+      "targets": [
+        ["css=button:nth-child(2)", "css:finder"],
+        ["xpath=//button[@onclick='deleteUser(7)']", "xpath:attributes"],
+        ["xpath=//ul[@id='userList']/li/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'❌')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4c6687e7-6911-4fc7-bb22-c958b3fdb97b",
+      "comment": "On vérifie si l'utilisateur a été supprimé",
+      "command": "assertElementNotPresent",
+      "target": "xpath=//ul[@id='userList']/li",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "910c9f9b-2cd3-48d6-b92a-d4679fccc214",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["3a8e77fc-7563-4d46-8cec-3e0a45b0c287"]
+  }],
+  "urls": ["http://localhost/"],
+  "plugins": []
+}

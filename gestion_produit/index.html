@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des utilisateurs</title>
+    <!-- Modification : Changement du chemin d'accès du fichier CSS
+    Avant : <code class="language-html">href="style.css"</code>
+    Après : <code class="language-html">href="./asset/css/style.css"</code>
+    Raison : Ajustement du chemin relatif vers un chemin absolu pour une meilleure gestion des ressources. -->
+    <link rel="stylesheet" href="./asset/css/style.css"> 
+</head>
+<body>
+
+    <h1>Gestion des utilisateurs</h1>
+
+    <form id="userForm">
+        <input type="hidden" id="userId">
+        <input type="text" id="name" placeholder="Nom" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <h2>Liste des utilisateurs</h2>
+
+    <!-- Ajout de la barre de recherche -->
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Rechercher par nom ou email...">
+        <button id="clearSearch">Effacer</button>
+    </div>
+
+    <ul id="userList"></ul>
+
+    <script src="./src/js/script.js"></script>
+
+</body>
+</html>
