@@ -190,20 +190,6 @@ Dans cette section, je vais detailler les tests **E2E** réalisés avec **Cypres
 
 ---
 
-#### 🕹️ Installation et configuration de Cypress  
-
-Tout d'abord il est néccessaire d'installer **Cypress** avec la commande suivante :  
-
-```sh
-npm install cypress --save-dev
-```
-
-Puis, lancez Cypress avec :  
-
-```sh
-npx cypress open
-```
-
 #### 🔢 Scénario de test avec Cypress  
 
 Le test automatisé suit le scénario suivant :  
