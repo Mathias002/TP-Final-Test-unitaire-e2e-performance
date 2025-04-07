@@ -658,7 +658,7 @@ Dans le cadre de ce projet, l’intelligence artificielle, notamment [**ChatGPT*
 Plus précisément, l’IA a été mobilisée pour :
 
 - **La mise en forme du rapport**, afin d’assurer une structure claire, fluide et cohérente tout au long du document.
-- **Le développement de la nouvelle fonctionnalité de recherche côté client**, Le dévelopement n’étant pas l’objectif central du projet, j'ai favorisé l'IA concernant cette tâche. L’IA à ce stade a permis **de gagner du temps sur l’implémentation** pour mieux se concentrer sur l’intégration des tests et l’analyse des performances.
+- **Le développement de la nouvelle fonctionnalité de recherche côté client**, Le dévelopement n’étant pas l’objectif central du projet, j'ai favorisé l'utilisation de l'IA pour la mise en place de cette étape. L’IA à ce stade a permis **de gagner du temps sur l’implémentation** pour mieux se concentrer sur l’intégration des tests et l’analyse des performances.
 - **La configuration des tests de performance dans JMeter**, en particulier pour simuler des requêtes AJAX POST correctement, et interpréter les résultats.
 
 L’IA a donc été utilisée comme **levier d’efficacité** tout en servant un objectif d'accompagnement : comprendre, tester et optimiser une application web dans un contexte de qualité logicielle.
