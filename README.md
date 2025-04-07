@@ -116,6 +116,7 @@ Les tests démontrent que l’application fonctionne correctement pour **les cas
 
 #### 🎯 2.2.1 Objectif des tests E2E
 Les tests End-to-End (E2E) permettent de vérifier le bon fonctionnement global de l’application en simulant un parcours utilisateur réel. L’objectif principal est d’automatiser et de valider les interactions clés avec l’interface utilisateur.  
+
 Dans ce projet, j'ai utilisé **Selenium** pour tester les fonctionnalités essentielles du module de gestion des utilisateurs :  
 ✅ Ajout d’un nouvel utilisateur  
 ✅ Vérification de son affichage dans la liste  
